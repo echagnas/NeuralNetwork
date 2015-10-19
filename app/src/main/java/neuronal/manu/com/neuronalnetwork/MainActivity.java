@@ -11,12 +11,15 @@ public class MainActivity extends ActionBarActivity {
     private int count = 0;
     private int width;
     private int height;
+    private GraphView graphView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        graphView = (GraphView)findViewById(R.id.graphview);
         setup();
+        graphView.setTrainers(training);
         proceed();
     }
 
@@ -60,9 +63,12 @@ public class MainActivity extends ActionBarActivity {
         sb.append("Responses=");
         for(int i=0; i<count; i++){
             int guess = ptron.feedForward(training[i].getInputs());
+            training[i].setResult(guess);
             sb.append(guess);
             sb.append("; ");
         }
+        graphView.invalidate();
+
         Log.d("NEURON", sb.toString());
     }
 }

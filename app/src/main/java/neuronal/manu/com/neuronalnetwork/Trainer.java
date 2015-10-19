@@ -7,6 +7,7 @@ public class Trainer {
 
     private float[] inputs;
     private int answer;
+    private int result;
 
     public Trainer(float x, float y, int a){
         inputs = new float[3];
@@ -24,4 +25,11 @@ public class Trainer {
         return answer;
     }
 
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
 }
