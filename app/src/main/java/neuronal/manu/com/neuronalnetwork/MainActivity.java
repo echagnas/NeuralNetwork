@@ -40,10 +40,8 @@ public class MainActivity extends ActionBarActivity {
             int answer = 1;
             if(y<f(x)) answer = -1;
             training[i] = new Trainer(x, y, answer);
-            if(sb.length() > 0){
-                sb.append("; ");
-            }
             sb.append(answer);
+            sb.append("; ");
         }
         Log.d("NEURON", sb.toString());
     }
@@ -55,15 +53,15 @@ public class MainActivity extends ActionBarActivity {
 
     private void proceed(){
         ptron.train(training[count].getInputs(), training[count].getAnswer());
-        count = (count + 1) % training.length;
+        //count = (count + 1) % training.length;
+        count = training.length;
+        Log.d("NEURON", "count="+count+" training.length="+training.length);
         StringBuilder sb = new StringBuilder();
         sb.append("Responses=");
         for(int i=0; i<count; i++){
             int guess = ptron.feedForward(training[i].getInputs());
-            if(sb.length() > 0){
-                sb.append("; ");
-            }
             sb.append(guess);
+            sb.append("; ");
         }
         Log.d("NEURON", sb.toString());
     }
