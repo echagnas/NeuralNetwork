@@ -17,8 +17,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        graphView = (GraphView)findViewById(R.id.graphview);
         setup();
+        graphView = (GraphView)findViewById(R.id.graphview);
+        graphView.setSize(width, height);
         graphView.setTrainers(training);
         proceed();
     }
@@ -40,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
         for(int i=0; i<training.length; i++){
             float x = random(-width/2, width/2);
             float y = random(-height/2, height/2);
+            Log.d("POINT", "x="+x+" y="+y);
             int answer = 1;
             if(y<f(x)) answer = -1;
             training[i] = new Trainer(x, y, answer);
