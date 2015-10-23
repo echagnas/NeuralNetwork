@@ -58,7 +58,14 @@ public class MainActivity extends ActionBarActivity {
 
     private void proceed(){
         for(int j=0; j<training.length; j++) {
-            ptron.train(training[j].getInputs(), training[j].getAnswer());
+            int train = ptron.train(training[j].getInputs(), training[j].getAnswer());
+
+            if(train != training[j].getAnswer()){
+                Log.e("RESEAU","Training... => ERROR");
+            }else{
+                Log.d("RESEAU","Training... => NO ERROR");
+            }
+
             //count = (count + 1) % training.length;
         }
 

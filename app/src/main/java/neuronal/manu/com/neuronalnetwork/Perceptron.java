@@ -30,13 +30,14 @@ public class Perceptron {
         return -1;
     }
 
-    public void train(float[] inputs, int desired){
+    public int train(float[] inputs, int desired){
         Log.d("MANUDEBUG", "training inputs="+inputs+" desired="+desired);
         int guess = feedForward(inputs);
         float error = desired - guess;
         for(int i=0; i<weights.length; i++){
             weights[i] += c * error * inputs[i];
         }
+        return guess;
     }
 
 }
