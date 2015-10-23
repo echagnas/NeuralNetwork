@@ -1,5 +1,7 @@
 package neuronal.manu.com.neuronalnetwork;
 
+import android.util.Log;
+
 /**
  * Created by antares on 19/10/15.
  */
@@ -29,6 +31,7 @@ public class Perceptron {
     }
 
     public void train(float[] inputs, int desired){
+        Log.d("MANUDEBUG", "training inputs="+inputs+" desired="+desired);
         int guess = feedForward(inputs);
         float error = desired - guess;
         for(int i=0; i<weights.length; i++){

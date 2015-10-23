@@ -70,7 +70,7 @@ public class GraphView extends View {
         Paint linePaint = new Paint();
         linePaint.setStrokeWidth(strokeWidth);
         linePaint.setColor(getResources().getColor(R.color.line));
-        canvas.drawLine((-320/refSize)+width/2, (-639/refSize)+height/2, (320/refSize)+width/2, (641/refSize)+height/2, linePaint);
+        canvas.drawLine((-320/refSize)+width/2, -(-639/refSize)+height/2, (320/refSize)+width/2, -(641/refSize)+height/2, linePaint);
 
         if(training != null){
             for(Trainer trainer : training){

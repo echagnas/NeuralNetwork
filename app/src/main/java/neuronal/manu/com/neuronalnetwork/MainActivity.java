@@ -7,8 +7,7 @@ import android.util.Log;
 public class MainActivity extends ActionBarActivity {
 
     private Perceptron ptron;
-    private Trainer[] training = new Trainer[100];
-    private int count = 0;
+    private Trainer[] training = new Trainer[1000];
     private int width;
     private int height;
     private GraphView graphView;
@@ -36,19 +35,20 @@ public class MainActivity extends ActionBarActivity {
     private void setup(){
         size(640, 360);
         ptron = new Perceptron(3);
-        StringBuilder sb = new StringBuilder();
-        sb.append("Answers=");
         for(int i=0; i<training.length; i++){
             float x = random(-width/2, width/2);
             float y = random(-height/2, height/2);
-            Log.d("POINT", "x="+x+" y="+y);
             int answer = 1;
             if(y<f(x)) answer = -1;
             training[i] = new Trainer(x, y, answer);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Waiting answer for ");
+            sb.append("x="+x+" and y="+y);
+            sb.append(" is ");
             sb.append(answer);
-            sb.append("; ");
+            Log.d("RESEAU", sb.toString());
         }
-        Log.d("NEURON", sb.toString());
     }
 
     public static float random(float x, float y){
@@ -57,20 +57,22 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void proceed(){
-        ptron.train(training[count].getInputs(), training[count].getAnswer());
-        //count = (count + 1) % training.length;
-        count = training.length;
-        Log.d("NEURON", "count="+count+" training.length="+training.length);
-        StringBuilder sb = new StringBuilder();
-        sb.append("Responses=");
-        for(int i=0; i<count; i++){
+        for(int j=0; j<training.length; j++) {
+            ptron.train(training[j].getInputs(), training[j].getAnswer());
+            //count = (count + 1) % training.length;
+        }
+
+        for(int i=0; i<training.length; i++){
             int guess = ptron.feedForward(training[i].getInputs());
             training[i].setResult(guess);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Real answer for ");
+            sb.append("x="+training[i].getInputs()[0]+" and y="+training[i].getInputs()[1]);
+            sb.append(" is ");
             sb.append(guess);
-            sb.append("; ");
+            Log.d("RESEAU", sb.toString());
         }
         graphView.invalidate();
-
-        Log.d("NEURON", sb.toString());
     }
 }
