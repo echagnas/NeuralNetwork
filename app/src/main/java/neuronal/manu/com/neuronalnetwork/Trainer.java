@@ -1,7 +1,7 @@
 package neuronal.manu.com.neuronalnetwork;
 
 /**
- * Created by antares on 19/10/15.
+ * Created by manu on 19/10/15.
  */
 public class Trainer {
 
@@ -11,10 +11,10 @@ public class Trainer {
 
     public Trainer(float x, float y, int a){
         inputs = new float[3];
-        inputs[0] = x;
-        inputs[1] = y;
+        inputs[0] = x; //x
+        inputs[1] = y; //y
         inputs[2] = 1; //bias
-        answer = a;
+        answer = a; //the answer
     }
 
     public float[] getInputs() {
